@@ -263,8 +263,14 @@ nav .mobile-nav {
 
 }
 
+/*SECTION 2: ABOUT */
+.about-section h2 {
+    font-size: 34px;
+    margin-bottom: 10px;
+    padding: 0 10px;
+}
 
-/*SECTION 2: PROJECT GRID */
+/*SECTION 3: PROJECT GRID */
 .project-grid-section {
     margin-bottom: 100px;
     margin-top: 50px;
@@ -378,7 +384,7 @@ nav .mobile-nav {
 
 
 
-/* SECTION 3: SKILLS */
+/* SECTION 4: SKILLS */
 .skills-section {
     margin-bottom: 100px;
     display:flex;
@@ -437,7 +443,7 @@ nav .mobile-nav {
 }
 
 
-/* SECTION 4: CONTACT */
+/* SECTION 5: CONTACT */
 .contact-section {
     padding: 25px 25px;
     max-width: 600px;
