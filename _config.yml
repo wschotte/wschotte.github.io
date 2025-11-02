@@ -15,9 +15,9 @@ title: William Schotte's Portfolio # This is what shows up in the tab of the bro
 name: William Schotte
 headline: Computer Engineering Student @ Georgia Tech
 description: >- # dont remove this line. this will ignore all new lines until the next section
-  Write an awesome intro and discuss your highlights and qualification. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+  I'm a first-year student at GT, majoring in Computer Engineering with a focus in Computing Hardware & Emerging Architectures and Systems & Architecture. 
+  My current interests lie in PCB design and embedded systems, and I'm a member of HyTech Racing's Electrical Team where I help write firmware to collect and send
+  sensor data.
 
 # Place your profile image in /assets/images/profile-image/folder and edit the file name
 profile_image: ./assets/images/profile-image/avatar.jpeg
