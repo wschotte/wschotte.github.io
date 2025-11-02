@@ -7,5 +7,5 @@ skills:
 - Component Design
 - Soldering
 - Altium Designer 
-main-image: /project.webp 
+main-image: /keychain-front.png 
 ---
