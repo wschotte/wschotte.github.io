@@ -17,7 +17,7 @@ To make a keychain in the shape of the HyTech logo that can be connected to a US
 Starting this project, I had little experience with PCB design, reading datasheets, soldering, and none at all with Altium Designer. Throughout the project, I learned a lot about the process of designing PCBs, parsing datasheets, and using Altium, to the point where I can comfortably work with these tools and complete similar tasks on my own. 
 ## Designing LM555 Timer Component/Footprint
 {% include image-gallery.html images="timer.png" height="400" %}
-{% include image-gallery.html images="timer-footprint.png" height="400" %}
+{% include image-gallery.html images="timer-footprint.jpg" height="400" %}
 ## Designing Timer/LED and USB-C Port Schematics
 {% include image-gallery.html images="timer-led.png" height="400" %}
 {% include image-gallery.html images="usb-c.png" height="400" %}
