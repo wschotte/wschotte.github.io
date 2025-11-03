@@ -25,7 +25,9 @@ Starting this project, I had little experience with PCB design, reading datashee
 {% include image-gallery.html images="pcb-shape.png" height="400" %}
 ## Placing and Routing Components
 {% include image-gallery.html images="traces-back.png" height="400" %}
+<div style="display: flex; gap: 10px; justify-content: center;">
 {% include image-gallery.html images="pcb-back.jpg" height="400" %}
 {% include image-gallery.html images="pcb-front.jpg" height="400" %}
+</div>
 ## Soldering the Final PCB
 {% include image-gallery.html images="soldered.jpg" height="400" %}
