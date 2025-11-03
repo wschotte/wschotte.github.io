@@ -1,0 +1,19 @@
+<!-- SECTION: Honors/Achievements -->
+<section id="honors" class="honors-section">
+    <h2>Honors/Achievements</h2>
+        
+    <ul class="honors-categories">
+        {% for honor in site.honors %}
+          <li>
+            <div class="honors-card">
+              <span class="honor-title">{{ honor.title }}</span>
+            
+              <p class="honor-description">
+                {{ honor.description }}
+              </p>
+            </div>
+          </li> 
+        {% endfor %}
+      </ul>
+
+</section>

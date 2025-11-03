@@ -61,6 +61,27 @@ skills:
     - C++
 
 
+# Honors/Achievements Section - Add your honors and achievements with titles and descriptions
+honors:
+  - title: Example Honor/Achievement
+    description: This is a brief 1-2 sentence description of the honor or achievement. Replace this with your actual achievements.
+  - title: Another Achievement
+    description: Add another achievement here with a short description explaining what it is and when you received it.
+
+
+# Coursework Section - Add your current and completed courses
+coursework:
+  current:
+    - Course Name 1
+    - Course Name 2
+    - Course Name 3
+  completed:
+    - Completed Course 1
+    - Completed Course 2
+    - Completed Course 3
+    - Completed Course 4
+
+
 
 # Contact Form Setup. Setup an account and copy over the key. When someone fills out the form, it will be received in your email.
 formspree-key:   https://formspree.io/f/{xpwobkyq}
