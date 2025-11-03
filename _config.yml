@@ -63,23 +63,23 @@ skills:
 
 # Honors/Achievements Section - Add your honors and achievements with titles and descriptions
 honors:
-  - title: Example Honor/Achievement
-    description: This is a brief 1-2 sentence description of the honor or achievement. Replace this with your actual achievements.
-  - title: Another Achievement
-    description: Add another achievement here with a short description explaining what it is and when you received it.
+  - title: Linear Algebra Morley Award
+    description: Awarded to top 2% of scorers in Ga Tech's Distance Linear Algebra (top 22/1100+ students). Cutoff was a 100 in the class.
+  - title: Multivariable Calculus Morley Award
+    description: Awarded to top 2% of scorers in Ga Tech's Distance Multivariable Calculus (top 23/1150+ students). Cutoff was a 100 in the class.
 
 
 # Coursework Section - Add your current and completed courses
 coursework:
   current:
-    - Course Name 1
-    - Course Name 2
-    - Course Name 3
+    - Intro to Computing (Python)
+    - Differential Equations
+    - Physics 2
   completed:
-    - Completed Course 1
-    - Completed Course 2
-    - Completed Course 3
-    - Completed Course 4
+    - Linear Algebra
+    - Multivariable Calculus
+    - Differential/Integral Calculus
+    - Physics 1
 
 
 
