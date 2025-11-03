@@ -1,0 +1,31 @@
+<!-- SECTION: Relevant Coursework -->
+<section id="coursework" class="coursework-section">
+    <h2>Relevant Coursework</h2>
+    
+    <div class="coursework-container">
+        <!-- Current Courses -->
+        <div class="coursework-category">
+            <h3 class="category-header">Current Courses</h3>
+            <ul class="course-list">
+                {% for course in site.coursework.current %}
+                <li class="course-item">
+                    <span class="course-name">{{ course }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <!-- Completed Courses -->
+        <div class="coursework-category">
+            <h3 class="category-header">Completed Coursework</h3>
+            <ul class="course-list">
+                {% for course in site.coursework.completed %}
+                <li class="course-item">
+                    <span class="course-name">{{ course }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+</section>
