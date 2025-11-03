@@ -7,5 +7,5 @@ skills:
 - Component Design
 - Soldering
 - Altium Designer 
-main-image: /keychain-front.png 
+main-image: /keychain-front.jpg 
 ---
