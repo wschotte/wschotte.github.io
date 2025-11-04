@@ -1,7 +1,7 @@
 ---
 layout: post
 title: LED Keychain
-description:  For HyTech Racing new member onboarding, I designed the components and PCB for a flashing LED keychain in Altium Designer, then sent the design for manufacturing and soldered the physical board.
+description:  For HyTech Racing new member onboarding, I designed the PCB for a flashing LED keychain in Altium Designer, then sent the design for manufacturing and soldered the physical board.
 skills: 
 - PCB Design
 - Component Design
