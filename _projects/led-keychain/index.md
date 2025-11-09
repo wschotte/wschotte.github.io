@@ -39,5 +39,9 @@ Below, you can see the 3d model in Altium of the back and front of the PCB I des
 {% include image-gallery.html images="pcb-front.jpg" height="400" %}
 </div>
 ## Soldering the Final PCB
-Finally, the only step left after manufacturing the PCB was to solder the components onto the board. [IN PROGRESS]
-{% include image-gallery.html images="soldered.jpg" height="400" %}
+Finally, the design was sent to a manufacturer. Since the PCB I designed used many tiny components designed for surface mount soldering, I received the PCB and a stencil for spreading the solder paste.
+<br>
+For the first step in actually soldering the board, I used the stencil to spread a thin layer of solder paste over each pad. However, when taking the stencil off, my finger slipped and I ended up slightly smearing the paste. This would later cause bridging between some of the pads, but I could clean this up afterwards.
+
+### Demonstration Video
+{% include youtube-video.html id="{b7NH5TUCuGM}" autoplay= "false"%}
