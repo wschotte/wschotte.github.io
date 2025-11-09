@@ -35,13 +35,25 @@ Finally, I had to place and route the schematics/components I had designed for m
 {% include image-gallery.html images="traces-back.png" height="400" %}
 Below, you can see the 3d model in Altium of the back and front of the PCB I designed. This design passed all the design rule checks implemented in altium, signifying that it was ready to be manufactured.
 <div style="display: flex; gap: 10px; justify-content: center;">
-{% include image-gallery.html images="pcb-back.jpg" height="400" %}
-{% include image-gallery.html images="pcb-front.jpg" height="400" %}
+  {% include image-gallery.html images="pcb-back.jpg" height="400" %}
+  {% include image-gallery.html images="pcb-front.jpg" height="400" %}
 </div>
 ## Soldering the Final PCB
 Finally, the design was sent to a manufacturer. Since the PCB I designed used many tiny components designed for surface mount soldering, I received the PCB and a stencil for spreading the solder paste.
 <br>
-For the first step in actually soldering the board, I used the stencil to spread a thin layer of solder paste over each pad. However, when taking the stencil off, my finger slipped and I ended up slightly smearing the paste. This would later cause bridging between some of the pads, but I could clean this up afterwards.
-{% include image-gallery.html images="step1.HEIC" height="400" %}
+For the first step in actually soldering the board, I used the stencil to spread a thin layer of solder paste over each pad. However, when taking the stencil off, my finger slipped and I ended up slightly smearing the paste. This would later cause bridging between some of the pads, but I could clean this up afterwards. Afterwards, I simply had to place the components onto the solder paste using tweezers.
+<div style="display: flex; gap: 10px; justify-content: center;">
+  {% include image-gallery.html images="step1.jpg" height="400" %}
+  {% include image-gallery.html images="step2.jpg" height="400" %}
+</div>
+Next, I placed the PCB inside a reflow oven to melt the solder, so that when it was cooled afterwards, the components would be soldered to the board. 
+{% include image-gallery.html images="step3.jpg" height="400" %}
+As expected, my board had bridging between a few of the pads connecting the USB-C port. I was able to fix this though by using desoldering wick and reheating the solder using a soldering iron.
+<div style="display: flex; gap: 10px; justify-content: center;">
+  {% include image-gallery.html images="step4.jpg" height="400" %}
+  {% include image-gallery.html images="step5.jpg" height="400" %}
+</div>
+Finally, I only had the LEDs on the front left to solder. For this part, I soldered the components by hand using a soldering iron. After this step, I plugged the board into a standard USB-C cable connected to a laptop and the LEDs flashed as expected.
+{% include image-gallery.html images="step6.jpg" height="400" %}
 ### Demonstration Video
 {% include youtube-video.html id="{tO07zj7zr6k}" autoplay= "false"%}
