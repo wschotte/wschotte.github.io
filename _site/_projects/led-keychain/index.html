@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <script src="/assets/js/script.js"></script>
+
+    
+    <title>William Schotte's Portfolio</title>
+    
+
+</head>
+<body>
+    <!-- NAVBAR -->
+     <!-- _includes/nav.html -->
+<nav>
+    <div class="left">
+        <a href="/">William Schotte</a>
+    </div>
+
+    <!-- Desktop Menu -->
+    <div class="right desktop-nav">
+        <a href="/">
+            <span>Home</span>
+        </a>
+        <a href="/projects/">
+            <span>Projects</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1Rc_Uu_Ed_9YKX92FWFVh-O782x5ISS_b/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+            <span>Resume</span>
+        </a>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button class="menu-toggle" aria-label="Toggle menu">
+        <i class="fa fa-bars fa-2x"></i>
+    </button>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-nav">
+        <a href="/">
+            <span>Home</span>
+        </a>
+        <a href="/projects/">
+            <span>Projects</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1Rc_Uu_Ed_9YKX92FWFVh-O782x5ISS_b/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+            <span>Resume</span>
+        </a>
+    </div>
+</nav>
+
+     <div class="page"><div class="post-view">
+    <div class="summary">
+        
+       
+        
+               
+        <img src="/_projects/led-keychain/keychain-front.jpg" alt="LED Keychain image">
+        
+        <div class="title-header">
+            <h1>LED Keychain</h1>
+        </div>
+        
+        <div class="project-description">
+            <h2>Project Overview</h2>
+            <p>For HyTech Racing new member onboarding, I designed the PCB for a flashing LED keychain in Altium Designer, then sent the design for manufacturing and soldered the physical board.</p>
+        </div>
+        <div class="skills-card">
+            <h2>Skills Used</h2> 
+            <div class="skills-list">
+                
+                <span class="skill">PCB Design</span>    
+                
+                <span class="skill">Component Design</span>    
+                
+                <span class="skill">Soldering</span>    
+                
+                <span class="skill">Altium Designer</span>    
+                
+            </div>
+        </div>
+    </div>
+      
+    <div class="content">
+        <hr />
+<h1 id="goal">Goal</h1>
+<p>To make a keychain in the shape of the HyTech logo that can be connected to a USB-C power source and flash 6 LED lights on a 53% duty cycle. The circuit models the Ready-To-Move light used on the car to indicate that high voltage power is connected to the motors.</p>
+<h2 id="backgroundintroduction">Background/Introduction</h2>
+<p>Starting this project, I had little experience with PCB design, reading datasheets, soldering, and none at all with Altium Designer. Throughout the project, I learned a lot about the process of designing PCBs, parsing datasheets, and using Altium, to the point where I can comfortably work with these tools and complete similar tasks on my own.</p>
+<h2 id="designing-lm555-timer-componentfootprint">Designing LM555 Timer Component/Footprint</h2>
+<p>In order to make the keychain LEDs flash, I needed a timer component on the PCB. I opted to go with an LM555 Timer, since it can operate in astable mode and continuously oscillate between high and low outputs, with a very easily adjustable duty cycle (only requiring two resistors and two capacitors). Along with this, LM555s are widely available and inexpensive.
+<br />
+Starting the PCB design, I had to create a component in Altium to represent the LM555 timer in the schematic. This was fairly simple, and I only had to reference the pins on the datasheet for proper labelling.</p>
+
+<div class="image-gallery" style="--gallery-height: 400px;">
+  
+      
+      
+          
+          <img src="/_projects/led-keychain/timer.png" alt="timer.png" loading="lazy" onerror="this.onerror=null;this.src=this.src.replace('.webp','.png').replace('.png','.webp');" />
+      
+  
+</div>
+<p>After this, I also has to create the component’s footprint, for eventually placing and routing the component in the actual design of the PCB. This was also a simple process, using a variety of measurements from the datasheet in order for the pads to properly match the component when soldering later on.</p>
+
+<div class="image-gallery" style="--gallery-height: 400px;">
+  
+      
+      
+          
+          <img src="/_projects/led-keychain/timer-footprint.jpg" alt="timer-footprint.jpg" loading="lazy" onerror="this.onerror=null;this.src=this.src.replace('.webp','.png').replace('.png','.webp');" />
+      
+  
+</div>
+<h2 id="designing-timerled-and-usb-c-port-schematics">Designing Timer/LED and USB-C Port Schematics</h2>
+<p>After creating the LM555 component, I created a schematic to depict the necessary connections for the LEDs to blink on a cycle the timer output. The overall design wasn’t very difficult, since the datasheet provided an example circuit that I could base my design on. Below, you can see that I connected a 5 volt power source to the timer component, and using the specific values I calculated for the resistors and capacitors referencing the datasheet, my design resulted in the timer outputting a high signal 53% of the time, with a frequency of 2.88 Hz. Combined with a decoupling capacitor to reduce voltage fluctations, the timer connects to the 6 LEDs, using a resistor to decrease the current supplied to each and prevent them from burning out.</p>
+
+<div class="image-gallery" style="--gallery-height: 400px;">
+  
+      
+      
+          
+          <img src="/_projects/led-keychain/timer-led.png" alt="timer-led.png" loading="lazy" onerror="this.onerror=null;this.src=this.src.replace('.webp','.png').replace('.png','.webp');" />
+      
+  
+</div>
+<p>Next, I created the schematic for the USB-C port that would supply power to the keychain. The component itself already existed in the library I was using, so all I had to do was add a decoupling capacitor, output of 5V, ground connection, and most importantly, a specific pair of pull-down resistors on CC1 and CC2. From my research online, the combination of resistors depicted is commonly used to make a USB-C port draw 5V power from its source.</p>
+
+<div class="image-gallery" style="--gallery-height: 400px;">
+  
+      
+      
+          
+          <img src="/_projects/led-keychain/usb-c.png" alt="usb-c.png" loading="lazy" onerror="this.onerror=null;this.src=this.src.replace('.webp','.png').replace('.png','.webp');" />
+      
+  
+</div>
+<h2 id="creating-pcb-shapedesign">Creating PCB Shape/Design</h2>
+<p>After designing the schematics, I needed the PCB shape to place them on. The PCB I designed was in the shape of the HyTech logo, with a hole in the corner to attach to a key ring or something similar. For the printed logo, I used holes in the solder mask, causing the gold-plated copper to show through.</p>
+
+<div class="image-gallery" style="--gallery-height: 400px;">
+  
+      
+      
+          
+          <img src="/_projects/led-keychain/pcb-shape.png" alt="pcb-shape.png" loading="lazy" onerror="this.onerror=null;this.src=this.src.replace('.webp','.png').replace('.png','.webp');" />
+      
+  
+</div>
+<h2 id="placing-and-routing-components">Placing and Routing Components</h2>
+<p>Finally, I had to place and route the schematics/components I had designed for my PCB. This included resistors, capacitors, LEDS, the USB C port, and the timer component. After placing the LEDs in a cross shaped pattern on the front, I placed the rest of the components on the back of the PCB in order to have as clean of a front to my keychain as possible. The biggest constraints I had as a result were the minimal usage of vias that went along with this, making it very difficult to connect everything on the back and the front without overlapping, and the lack of space for traces on the back, due to the large number of components squeezed into one place. However, after many trials and errors, I was able to arrange my components in a way that allowed me to route traces between all the components my schematics detailed as needing connections. However, in the future, I could definitely arrange my components more efficiently. If I were to remake this project or redesign it in the future, I would reroute the PCB to use fewer traces and connect them without going under the USB-C port or taking any unneccessarily long paths.</p>
+
+<div class="image-gallery" style="--gallery-height: 400px;">
+  
+      
+      
+          
+          <img src="/_projects/led-keychain/traces-back.png" alt="traces-back.png" loading="lazy" onerror="this.onerror=null;this.src=this.src.replace('.webp','.png').replace('.png','.webp');" />
+      
+  
+</div>
+<p>Below, you can see the 3d model in Altium of the back and front of the PCB I designed. This design passed all the design rule checks implemented in altium, signifying that it was ready to be manufactured.</p>
+<div style="display: flex; gap: 10px; justify-content: center;">
+  
+
+
+<div class="image-gallery" style="--gallery-height: 400px;">
+  
+      
+      
+          
+          <img src="/_projects/led-keychain/pcb-back.jpg" alt="pcb-back.jpg" loading="lazy" onerror="this.onerror=null;this.src=this.src.replace('.webp','.png').replace('.png','.webp');" />
+      
+  
+</div>
+  
+
+
+<div class="image-gallery" style="--gallery-height: 400px;">
+  
+      
+      
+          
+          <img src="/_projects/led-keychain/pcb-front.jpg" alt="pcb-front.jpg" loading="lazy" onerror="this.onerror=null;this.src=this.src.replace('.webp','.png').replace('.png','.webp');" />
+      
+  
+</div>
+</div>
+<h2 id="soldering-the-final-pcb">Soldering the Final PCB</h2>
+<p>Finally, the design was sent to a manufacturer. Since the PCB I designed used many tiny components designed for surface mount soldering, I received the PCB and a stencil for spreading the solder paste.
+<br />
+For the first step in actually soldering the board, I used the stencil to spread a thin layer of solder paste over each pad. However, when taking the stencil off, my finger slipped and I ended up slightly smearing the paste. This would later cause bridging between some of the pads, but I could clean this up afterwards. Afterwards, I simply had to place the components onto the solder paste using tweezers.</p>
+<div style="display: flex; gap: 10px; justify-content: center;">
+  
+
+
+<div class="image-gallery" style="--gallery-height: 400px;">
+  
+      
+      
+          
+          <img src="/_projects/led-keychain/step1.jpg" alt="step1.jpg" loading="lazy" onerror="this.onerror=null;this.src=this.src.replace('.webp','.png').replace('.png','.webp');" />
+      
+  
+</div>
+  
+
+
+<div class="image-gallery" style="--gallery-height: 400px;">
+  
+      
+      
+          
+          <img src="/_projects/led-keychain/step2.jpg" alt="step2.jpg" loading="lazy" onerror="this.onerror=null;this.src=this.src.replace('.webp','.png').replace('.png','.webp');" />
+      
+  
+</div>
+</div>
+<p>Next, I placed the PCB inside a reflow oven to melt the solder, so that when it was cooled afterwards, the components would be soldered to the board.</p>
+
+<div class="image-gallery" style="--gallery-height: 400px;">
+  
+      
+      
+          
+          <img src="/_projects/led-keychain/step3.jpg" alt="step3.jpg" loading="lazy" onerror="this.onerror=null;this.src=this.src.replace('.webp','.png').replace('.png','.webp');" />
+      
+  
+</div>
+<p>As expected, my board had bridging between a few of the pads connecting the USB-C port. I was able to fix this though by using desoldering wick and reheating the solder using a soldering iron.</p>
+<div style="display: flex; gap: 10px; justify-content: center;">
+  
+
+
+<div class="image-gallery" style="--gallery-height: 400px;">
+  
+      
+      
+          
+          <img src="/_projects/led-keychain/step4.jpg" alt="step4.jpg" loading="lazy" onerror="this.onerror=null;this.src=this.src.replace('.webp','.png').replace('.png','.webp');" />
+      
+  
+</div>
+  
+
+
+<div class="image-gallery" style="--gallery-height: 400px;">
+  
+      
+      
+          
+          <img src="/_projects/led-keychain/step5.jpg" alt="step5.jpg" loading="lazy" onerror="this.onerror=null;this.src=this.src.replace('.webp','.png').replace('.png','.webp');" />
+      
+  
+</div>
+</div>
+<p>Finally, I only had the LEDs on the front left to solder. For this part, I soldered the components by hand using a soldering iron. After this step, I plugged the board into a standard USB-C cable connected to a laptop and the LEDs flashed as expected.</p>
+
+<div class="image-gallery" style="--gallery-height: 400px;">
+  
+      
+      
+          
+          <img src="/_projects/led-keychain/step6.jpg" alt="step6.jpg" loading="lazy" onerror="this.onerror=null;this.src=this.src.replace('.webp','.png').replace('.png','.webp');" />
+      
+  
+</div>
+<h2 id="demonstration-video">Demonstration Video</h2>
+
+<div class="youtube-container" style="--max-width: 560px">
+    <div class="youtube-aspect-ratio">
+        <iframe src="https://www.youtube.com/embed/tO07zj7zr6k?mute=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
+        </iframe>
+    </div>
+</div>
+
+    </div>
+</div>
+
+</div>
+
+     
+</body>
+
+    <footer>
+    <div class="footer-content">
+        <div class="links">
+            <a href="/">
+                <span>Home</span>
+            </a>
+            <a href="/projects/">
+                <span>Projects</span>
+            </a>
+            <a href=https://drive.google.com/file/d/1Rc_Uu_Ed_9YKX92FWFVh-O782x5ISS_b/view?usp=sharing target="_blank" rel="noopener noreferrer">
+                <span>Resume</span>
+            </a>
+        </div>
+    </div>
+    <div class="license">
+        <p>Free-To-Engineer portfolio template © 2025 by lowinertia.com is licensed under <a href="https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1">CC BY 4.0</a></p>
+    </div>
+</footer>
+
+</html>

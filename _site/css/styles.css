@@ -1,10 +1,10 @@
 :root {
-  --text-color: #1f2937;
-  --border-color: #e5e9f0;
-  --link-color: #3b82f6;
-  --highlight-color: #1e40af;
-  --background-color: #f8faff;
-  --light-background-color: #f1f5ff;
+  --text-color: #1a1c20;
+  --border-color: #ddd;
+  --link-color: #4a76ee;
+  --highlight-color: #0c0cf2;
+  --background-color: #ffffff;
+  --light-background-color: #f3f5fb;
 }
 
 * {
@@ -92,7 +92,9 @@ nav .right a:last-child
 }
 
 nav .right a:last-child:hover,
-nav .mobile-nav a:last-child:hover {
+nav .right a span:last-child:hover,
+nav .mobile-nav a:last-child:hover,
+nav .mobile-nav a span:last-child:hover {
     color: var(--text-color);
     background-color: var(--light-background-color);
     border-radius: 10px;
@@ -210,9 +212,9 @@ nav .mobile-nav {
     color: var(--link-color);
 }
 
-.hero-section .text .links a:hover {
+.hero-section .text .links a:hover,
+.hero-section .text .links a:hover span {
     color: var(--text-color);
-    border: 2px solid var(--text-color);
 }
 
 .hero-section .headshot {
@@ -258,8 +260,14 @@ nav .mobile-nav {
 
 }
 
+/*SECTION 2: ABOUT */
+.about-section h2 {
+    font-size: 34px;
+    margin-bottom: 10px;
+    padding: 0 10px;
+}
 
-/*SECTION 2: PROJECT GRID */
+/*SECTION 3: PROJECT GRID */
 .project-grid-section {
     margin-bottom: 100px;
     margin-top: 50px;
@@ -373,7 +381,7 @@ nav .mobile-nav {
 
 
 
-/* SECTION 3: SKILLS */
+/* SECTION 4: SKILLS */
 .skills-section {
     margin-bottom: 100px;
     display:flex;
@@ -432,7 +440,103 @@ nav .mobile-nav {
 }
 
 
-/* SECTION 4: CONTACT */
+/* SECTION: HONORS/ACHIEVEMENTS */
+.honors-section {
+    margin-bottom: 100px;
+    display:flex;
+    flex-direction: column;
+}
+
+.honors-section h2 {
+    font-size: 34px;
+    margin-bottom: 15px;
+}
+
+.honors-section .honors-categories {
+    list-style: none;
+    padding-left: 0;
+}
+
+.honors-section .honors-categories .honors-card {
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.05);    
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+                  0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.honors-section .honors-categories .honor-title {
+    font-size: 20px;
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-color);
+}
+
+.honors-section .honors-categories .honor-description {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--text-color);
+    margin: 0;
+}
+
+
+/* SECTION: COURSEWORK */
+.coursework-section {
+    margin-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+}
+
+.coursework-section h2 {
+    font-size: 34px;
+    margin-bottom: 15px;
+}
+
+.coursework-section .coursework-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.coursework-section .coursework-category {
+    padding: 15px;
+    border-radius: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.05);    
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+                  0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.coursework-section .category-header {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--text-color);
+}
+
+.coursework-section .course-list {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.coursework-section .course-item {
+    display: flex;
+}
+
+.coursework-section .course-name {
+    padding: 3px 8px;
+    background-color: var(--light-background-color);
+    color: var(--link-color);
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+
+/* SECTION 5: CONTACT */
 .contact-section {
     padding: 25px 25px;
     max-width: 600px;
@@ -842,8 +946,10 @@ footer p {
         display: none;
     }
 
-    
-    
+    .project-grid-section .grid-container {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+  
     /*SECTION 4:Contact */
     .contact-section .group{
         flex-direction: column;
@@ -908,7 +1014,10 @@ footer p {
         font-size: 13px;
         padding: 5px;
     }
-
+   .hero-section .headshot img{
+        width: 275px;
+        justify-content: center
+    }
     
     /*SECTION 3:Skills */
     .skills-section {

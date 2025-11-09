@@ -56,4 +56,4 @@ As expected, my board had bridging between a few of the pads connecting the USB-
 Finally, I only had the LEDs on the front left to solder. For this part, I soldered the components by hand using a soldering iron. After this step, I plugged the board into a standard USB-C cable connected to a laptop and the LEDs flashed as expected.
 {% include image-gallery.html images="step6.jpg" height="400" %}
 ## Demonstration Video
-{% include youtube-video.html id="{tO07zj7zr6k}" autoplay= "false"%}
+{% include youtube-video.html id="tO07zj7zr6k" autoplay="false" %}
