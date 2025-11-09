@@ -44,4 +44,4 @@ Finally, the design was sent to a manufacturer. Since the PCB I designed used ma
 For the first step in actually soldering the board, I used the stencil to spread a thin layer of solder paste over each pad. However, when taking the stencil off, my finger slipped and I ended up slightly smearing the paste. This would later cause bridging between some of the pads, but I could clean this up afterwards.
 {% include image-gallery.html images="step1.HEIC" height="400" %}
 ### Demonstration Video
-{% include youtube-video.html id="{b7NH5TUCuGM}" autoplay= "false"%}
+{% include youtube-video.html id="{tO07zj7zr6k}" autoplay= "false"%}
