@@ -50,8 +50,10 @@ skills:
     - Solidworks
   - category: Prototyping
     tools:
-    - 3D Printing
     - Breadboarding
+    - Soldering
+    - Oscilloscope
+    - Multimeter
   - category: PCB Design
     tools:
     - Altium Designer
@@ -59,6 +61,8 @@ skills:
     tools:
     - Python
     - C++
+    - Git
+    - PlatformIO
 
 
 # Honors/Achievements Section - Add your honors and achievements with titles and descriptions
@@ -72,14 +76,18 @@ honors:
 # Coursework Section - Add your current and completed courses
 coursework:
   current:
-    - Intro to Computing (Python)
-    - Differential Equations
-    - Physics 2
+    - Object Oriented Programming (Java)
+    - Discrete Math
+    - Digital Design
+    - Circuit Analysis
   completed:
     - Linear Algebra
     - Multivariable Calculus
     - Differential/Integral Calculus
-    - Physics 1
+    - Differential Equations
+    - Physics 1 (Mechanics)
+    - Physics 2 (E&M)
+    - Intro to Computing (Python)
 
 
 
