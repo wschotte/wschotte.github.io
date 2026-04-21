@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Steering System / Interface — William Schotte</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #F8F6F2; --bg2: #F0EDE7; --text: #1C1A17; --text2: #6B6760;
+      --text3: #9A9590; --gold: #b3a369; --gold-light: #E8E2CC;
+      --border: #E4E0D8; --white: #FDFCFA; --radius: 10px; --max: 1080px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    ::selection { background: var(--gold-light); }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(248,246,242,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+    .nav-inner { max-width: var(--max); margin: 0 auto; padding: 0 40px; height: 54px; display: flex; align-items: center; gap: 16px; }
+    .nav-back { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text2); text-decoration: none; font-weight: 500; padding: 5px 10px; border-radius: 6px; transition: all 0.15s; }
+    .nav-back:hover { color: var(--text); background: var(--bg2); }
+    .nav-name { font-weight: 600; font-size: 15px; letter-spacing: -0.02em; color: var(--text); text-decoration: none; }
+    .nav-divider { color: var(--text3); font-size: 14px; }
+    main { max-width: var(--max); margin: 0 auto; padding: 100px 40px 80px; }
+    .project-label { font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    h1 { font-size: clamp(32px, 4vw, 48px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 12px; }
+    .meta { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; flex-wrap: wrap; }
+    .meta-org { font-size: 13px; font-weight: 500; color: var(--gold); background: var(--gold-light); padding: 4px 12px; border-radius: 20px; }
+    .meta-date { font-size: 13px; color: var(--text3); }
+    .divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+    .section-title { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text3); margin-bottom: 14px; }
+    .desc { font-size: 16px; color: var(--text2); line-height: 1.75; margin-bottom: 28px; text-wrap: pretty; max-width: 720px; }
+    .bullets { list-style: none; display: flex; flex-direction: column; gap: 14px; max-width: 720px; }
+    .bullets li { font-size: 15px; color: var(--text2); line-height: 1.7; padding-left: 20px; position: relative; text-wrap: pretty; }
+    .bullets li::before { content: '—'; position: absolute; left: 0; color: var(--gold); font-size: 13px; top: 3px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
+    .tag { font-size: 13px; font-weight: 450; padding: 5px 12px; border-radius: 20px; background: var(--bg2); color: var(--text2); border: 1px solid var(--border); }
+    footer { max-width: var(--max); margin: 0 auto; padding: 32px 40px; border-top: 1px solid var(--border); }
+    footer p { font-size: 13px; color: var(--text3); }
+
+    @media (max-width: 640px) {
+      main { padding: 72px 18px 60px; }
+      .nav-inner { padding: 0 18px; }
+      h1 { font-size: 28px; }
+      .desc { font-size: 14px; }
+      .bullets li { font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-back">← Back</a>
+    <span class="nav-divider">/</span>
+    <a href="../index.html" class="nav-name">William Schotte</a>
+    <span class="nav-divider">/</span>
+    <span style="font-size:13px;color:var(--text2)">Steering System / Interface</span>
+  </div>
+</nav>
+<main>
+  <div class="project-label">Firmware · Embedded Systems · Sensor Integration</div>
+  <h1>Steering System / Interface</h1>
+  <div class="meta">
+    <span class="meta-org">HyTech Racing</span>
+    <span class="meta-date">February – April 2026</span>
+  </div>
+  <p class="desc">Designed and implemented firmware for a digital steering sensor interface and overlying steering system on HyTech Racing's electric formula car. The project upgraded the car to a dual-sensor steering system by adding a 14-bit digital rotary encoder alongside the existing analog sensor, improving precision, noise immunity, and enabling safety-critical arbitration logic for software-driven torque vectoring and state estimation.</p>
+  <hr class="divider" />
+  <div class="section-title">Details</div>
+  <ul class="bullets">
+    <li>Selected UART with an RS422 transceiver over SPI for the RLS Orbis rotary encoder interface after identifying noise interference risk from proximity to front electric motors near the steering column. This traded some sampling speed for significantly improved noise immunity.</li>
+    <li>Developed a C++ firmware interface for the Orbis encoder on a Teensy 4.1, including bit masks, command constants, an error struct, and public functions for data sampling and sensor calibration, all designed to integrate cleanly into HyTech's large cooperative-scheduler codebase.</li>
+    <li>Built a steering system layer on top of the interface, implementing a rolling buffer of readings, min/max tracking, timestamped data, wheel/steering angle conversions, and sensor arbitration logic with error flagging based on velocity, sudden changes, and out-of-range values.</li>
+    <li>Implemented software calibration triggered through a multi-board CAN message chain: button press on VCF → packed into CAN message → received by VCR FSM → state validation → calibration command sent back to VCF → steering system recalibrates parameters.</li>
+    <li>Debugged hardware issues using a logic analyzer and oscilloscope. Found a damaged RS422 transceiver causing low voltage levels on the line, confirmed firmware output was correct, and resolved the issue by replacing the transceiver.</li>
+    <li>Validated the system on-car using serial debug prints and Foxglove to cross-check CAN data received by the Drivebrain (Raspberry Pi), confirming smooth, low-latency steering angle data with correct error flag triggering across calibration edge cases.</li>
+  </ul>
+  <div class="tags">
+    <span class="tag">C++</span>
+    <span class="tag">UART</span>
+    <span class="tag">CAN</span>
+    <span class="tag">Ethernet</span>
+    <span class="tag">Firmware</span>
+    <span class="tag">Teensy 4.1</span>
+    <span class="tag">SPI</span>
+    <span class="tag">Logic Analyzer</span>
+    <span class="tag">Oscilloscope</span>
+    <span class="tag">Foxglove</span>
+  </div>
+</main>
+<footer><p>William Schotte · Computer Engineering @ Georgia Tech</p></footer></body></html>

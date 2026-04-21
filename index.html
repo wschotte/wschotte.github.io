@@ -1,23 +1,1183 @@
----
-# Feel free to add content and custom Front Matter to this file.
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>William Schotte — Computer Engineering</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <meta name="ext-resource-dependency" content="uploads/profile_photo-1776734721993.jpeg" data-resource-id="profilePhoto" />
+  <template id="__bundler_thumbnail" data-bg-color="#F8F6F2">
+    <svg viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
+      <rect width="120" height="80" fill="#F8F6F2"/>
+      <rect x="10" y="12" width="40" height="6" rx="2" fill="#1C1A17"/>
+      <rect x="10" y="22" width="28" height="3" rx="1" fill="#B3A369"/>
+      <rect x="10" y="30" width="50" height="2" rx="1" fill="#E4E0D8"/>
+      <rect x="10" y="35" width="44" height="2" rx="1" fill="#E4E0D8"/>
+      <rect x="10" y="40" width="48" height="2" rx="1" fill="#E4E0D8"/>
+      <circle cx="95" cy="34" r="16" fill="#E4E0D8"/>
+      <rect x="10" y="54" width="20" height="8" rx="3" fill="#1C1A17"/>
+      <rect x="34" y="54" width="20" height="8" rx="3" fill="#F0EDE7" stroke="#E4E0D8" stroke-width="1"/>
+    </svg>
+  </template>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #F8F6F2;
+      --bg2: #F0EDE7;
+      --text: #1C1A17;
+      --text2: #6B6760;
+      --text3: #9A9590;
+      --gold: #B3A369;
+      --gold-light: #E8E2CC;
+      --border: #E4E0D8;
+      --white: #FDFCFA;
+      --radius: 10px;
+      --max: 1080px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::selection { background: var(--gold-light);
+      color: var(--gold); }
 
-layout: wrapper
----
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(248,246,242,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-name {
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 4px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px;
+      color: var(--text2);
+      text-decoration: none;
+      padding: 5px 10px;
+      border-radius: 6px;
+      transition: color 0.15s, background 0.15s;
+      font-weight: 450;
+    }
+    .nav-links a:hover { color: var(--text); background: var(--bg2); }
+    .nav-links a.active { color: var(--gold); font-weight: 500; }
 
-{% include hero.html%}
+    /* LAYOUT */
+    main {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 80px 40px 80px;
+    }
+
+    /* FADE IN */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* SECTION */
+    section { padding: 72px 0 0; }
+    .section-label {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+      padding-top: 24px;
+      border-top: 1.5px solid var(--border);
+    }
+
+    /* HERO */
+    #hero {
+      padding-top: 40px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: center;
+      min-height: calc(100vh - 80px);
+    }
+    .hero-text h1 {
+      font-size: clamp(42px, 5vw, 64px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .hero-text h2 {
+      font-size: 19px;
+      font-weight: 400;
+      color: var(--text2);
+      margin-bottom: 20px;
+      letter-spacing: -0.01em;
+    }
+    .hero-text h2 span { color: var(--gold); font-weight: 500; }
+    .hero-bio {
+      font-size: 16px;
+      color: var(--text2);
+      max-width: 500px;
+      line-height: 1.7;
+      margin-bottom: 32px;
+      text-wrap: pretty;
+    }
+    .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+    .hero-contact {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .hero-contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--text2);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .hero-contact-link:hover { color: var(--text); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.15s;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+    }
+    .btn-primary {
+      background: var(--text);
+      color: var(--white);
+    }
+    .btn-primary:hover { background: #2d2b28; transform: translateY(-1px); }
+    .btn-secondary {
+      background: var(--bg2);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { background: var(--border); transform: translateY(-1px); }
+    .hero-photo {
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      border: 3px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .about-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+    .about-card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+    .about-card p {
+      font-size: 14px;
+      color: var(--text2);
+      line-height: 1.7;
+      text-wrap: pretty;
+    }
+    .about-card.full { grid-column: 1 / -1; }
+
+    /* PROJECTS */
+    .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .project-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      cursor: pointer;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .project-card:hover {
+      border-color: var(--gold);
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    }
+    .project-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+    .project-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+    .project-org {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--gold);
+      background: var(--gold-light);
+      padding: 3px 9px;
+      border-radius: 20px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .project-date {
+      font-size: 12.5px;
+      color: var(--text3);
+      margin-bottom: 10px;
+    }
+    .project-desc {
+      font-size: 14px;
+      color: var(--text2);
+      line-height: 1.65;
+      margin-bottom: 14px;
+      text-wrap: pretty;
+    }
+    .project-bullets {
+      list-style: none;
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    .project-bullets.open { display: flex; }
+    .project-bullets li {
+      font-size: 13.5px;
+      color: var(--text2);
+      line-height: 1.6;
+      padding-left: 16px;
+      position: relative;
+      text-wrap: pretty;
+    }
+    .project-bullets li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--text3);
+      font-size: 11px;
+      top: 4px;
+    }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag {
+      font-size: 11.5px;
+      font-weight: 500;
+      padding: 3px 9px;
+      border-radius: 20px;
+      background: var(--bg2);
+      color: var(--text2);
+      border: 1px solid var(--border);
+    }
+    .expand-btn {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      color: var(--text3);
+      margin-top: 10px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: inherit;
+      padding: 0;
+    }
+    .expand-btn:hover { color: var(--text2); }
+
+    /* ACHIEVEMENTS */
+    .achievements-list { display: flex; flex-direction: column; gap: 12px; }
+    .achievement-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+    }
+    .achievement-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--gold-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .achievement-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+    .achievement-desc {
+      font-size: 13.5px;
+      color: var(--text2);
+      line-height: 1.6;
+      text-wrap: pretty;
+    }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .skill-group {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+    }
+    .skill-group-title {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-bottom: 12px;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .skill-tag {
+      font-size: 13px;
+      font-weight: 450;
+      padding: 5px 12px;
+      border-radius: 20px;
+      background: var(--bg2);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    /* COURSEWORK */
+    .coursework-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .course-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+    }
+    .course-card-title {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-bottom: 14px;
+    }
+    .course-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .course-list li {
+      font-size: 14px;
+      color: var(--text2);
+      padding-left: 14px;
+      position: relative;
+    }
+    .course-list li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      opacity: 0.6;
+    }
+
+    /* CONTACT */
+    .contact-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 13px 22px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      text-decoration: none;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.15s;
+    }
+    .contact-link:hover {
+      border-color: var(--gold);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      transform: translateY(-1px);
+    }
+    .contact-link svg { flex-shrink: 0; }
+
+    /* TIMELINE */
+    .timeline { display: flex; flex-direction: column; }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 0 28px;
+      position: relative;
+      padding-bottom: 28px;
+    }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-left {
+      text-align: right;
+      padding-top: 2px;
+    }
+    .timeline-date {
+      font-size: 12.5px;
+      color: var(--text3);
+      font-weight: 450;
+      line-height: 1.5;
+    }
+    .timeline-right {
+      position: relative;
+      padding-left: 24px;
+    }
+    .timeline-right::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+    .timeline-right::after {
+      content: '';
+      position: absolute;
+      left: 3px; top: 18px;
+      width: 1px;
+      bottom: -28px;
+      background: var(--border);
+    }
+    .timeline-item:last-child .timeline-right::after { display: none; }
+    .timeline-role {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+    .timeline-org {
+      font-size: 13px;
+      color: var(--text2);
+      margin-top: 2px;
+    }
+    .timeline-desc {
+      font-size: 13px;
+      color: var(--text3);
+      margin-top: 4px;
+      line-height: 1.5;
+    }
+    .timeline-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 2px 8px;
+      border-radius: 20px;
+      background: var(--gold-light);
+      color: var(--gold);
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    /* FOOTER */
+    footer {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 48px 24px 32px;
+      border-top: 1px solid var(--border);
+      margin-top: 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer p { font-size: 13px; color: var(--text3); }
+
+    /* PERSISTENT FOOTER BAR */
+    .sticky-bar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 99;
+      background: rgba(248,246,242,0.95);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid var(--border);
+      padding: 0 40px;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+    }
+    .sticky-bar a {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13px;
+      color: var(--text2);
+      text-decoration: none;
+      font-weight: 450;
+      transition: color 0.15s;
+    }
+    .sticky-bar a:hover { color: var(--text); }
+    .sticky-bar .bar-divider { width: 1px; height: 16px; background: var(--border); }
+    body { padding-bottom: 46px; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      :root { --max: 100%; }
+      main { padding: 80px 28px 80px; }
+      .nav-inner { padding: 0 28px; }
+      #hero { gap: 28px; }
+      .hero-photo { width: 200px; height: 200px; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .timeline-item { grid-template-columns: 130px 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      main { padding: 72px 18px 80px; }
+      .nav-inner { padding: 0 18px; }
+      .nav-links { display: none; }
+      #hero {
+        grid-template-columns: 1fr;
+        min-height: unset;
+        padding-top: 20px;
+        gap: 20px;
+      }
+      .hero-photo { width: 100px; height: 100px; order: -1; }
+      .hero-text h1 { font-size: 36px; }
+      .hero-text h2 { font-size: 15px; }
+      .hero-bio { font-size: 14px; }
+      .about-grid, .skills-grid, .coursework-grid { grid-template-columns: 1fr; }
+      .about-card.full { grid-column: 1; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 2px;
+        padding-bottom: 24px;
+      }
+      .timeline-left { text-align: left; }
+      .timeline-right::after { display: none; }
+      .achievements-list .achievement-item { flex-direction: column; gap: 10px; }
+      .contact-row { flex-direction: column; }
+      .hero-actions { flex-direction: column; align-items: flex-start; }
+      .hero-contact { gap: 14px; }
+      .sticky-bar { gap: 16px; padding: 0 18px; font-size: 12px; }
+      section { padding: 48px 0 0; }
+      .footer { padding: 32px 18px; }
+    }
+
+    @media (min-width: 1400px) {
+      :root { --max: 1180px; }
+      .hero-photo { width: 380px; height: 380px; }
+    }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useState, useEffect, useRef } = React;
+
+const NAV_ITEMS = [
+  { label: 'About', href: '#about' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Achievements', href: '#achievements' },
+  { label: 'Coursework', href: '#coursework' },
+  { label: 'Contact', href: '#contact' },
+];
+
+const PROJECTS = [
+  {
+    title: 'Steering System / Interface',
+    org: 'HyTech Racing',
+    date: 'Feb – Apr 2026',
+    desc: 'Upgraded a single analog hall-effect steering sensor to a dual-sensor system incorporating a 14-bit digital rotary encoder, implementing a full firmware interface and steering system with safety-critical arbitration logic for the car\'s torque vectoring system.',
+    tags: ['C++', 'UART', 'CAN', 'Firmware', 'Teensy 4.1'],
+    href: 'projects/steering-system.html',
+  },
+  {
+    title: 'Tactile Headband',
+    org: 'Hackathon',
+    date: 'March 2026',
+    desc: '1st place / 50+ teams in Hardware at Tech(HACK) Valley Hackathon 2026. In 36 hours, built a motion-controlled headband that transforms 3D audio into directional tactile feedback.',
+    tags: ['C++', 'Python', 'ESP32', 'Firmware', 'SPI', 'Bluetooth HID'],
+    href: 'projects/tactile-headband.html',
+  },
+  {
+    title: 'GCD Module Verification',
+    org: 'SiliconJackets',
+    date: 'March 2026',
+    desc: 'Designed a UVM testbench in SystemVerilog, debugging faulty RTL and achieving 99% code coverage.',
+    tags: ['SystemVerilog', 'UVM', 'Cadence Xcelium', 'RTL Verification'],
+    href: 'projects/gcd-verification.html',
+  },
+  {
+    title: '64-Bit Addition Calculator',
+    org: 'SiliconJackets',
+    date: 'Feb – Mar 2026',
+    desc: 'Full RTL design, verification, and physical design for a 64-bit adder with FSM-controlled SRAM interfacing.',
+    tags: ['SystemVerilog', 'RTL Design', 'Cadence Genus', 'Cadence Innovus', 'GDSII'],
+    href: 'projects/64-bit-calculator.html',
+  },
+{
+    title: 'ADC Firmware Interface',
+    org: 'HyTech Racing',
+    date: 'January 2026',
+    desc: "Developed C++ firmware interface for MAX1146-9 ADCs across HyTech Racing's PCBs.",
+    tags: ['C++', 'SPI', 'Embedded Systems', 'PCB', 'Firmware'],
+    href: 'projects/adc-interface.html',
+  },
+  {
+    title: 'LED Keychain',
+    org: 'HyTech Racing',
+    date: '2024',
+    desc: 'Designed the PCB for a flashing LED keychain in Altium Designer as part of new member onboarding, then sent the design for manufacturing and soldered the physical board.',
+    tags: ['PCB Design', 'Altium Designer', 'Soldering'],
+    href: 'projects/led-keychain.html',
+  },
+];
+
+const ACHIEVEMENTS = [
+  {
+    icon: '—',
+    title: '1st Place — Tech(HACK) Valley Hackathon 2026',
+    desc: 'First place out of 50+ teams in the Hardware track for the Tactile Headband project. Built in 36 hours.',
+  },
+  {
+    icon: '—',
+    title: 'Linear Algebra Morley Award',
+    desc: 'Awarded to the top 2% of scorers in Georgia Tech\'s Distance Linear Algebra course, ranking in the top 22 out of 1,100+ students.',
+  },
+  {
+    icon: '—',
+    title: 'Multivariable Calculus Morley Award',
+    desc: 'Awarded to the top 2% of scorers in Georgia Tech\'s Distance Multivariable Calculus course, ranking in the top 23 out of 1,150+ students.',
+  },
+];
+
+const SKILLS = [
+  {
+    group: 'Programming',
+    items: ['C', 'C++', 'SystemVerilog', 'UVM', 'Java', 'Git', 'PlatformIO'],
+  },
+  {
+    group: 'Hardware & Prototyping',
+    items: ['PCB Design', 'Soldering', 'Breadboarding', 'Oscilloscope', 'Multimeter', 'Wire Harnessing', 'Logic Analyzer'],
+  },
+  {
+    group: 'EDA Tools',
+    items: ['Altium Designer', 'Cadence Xcelium'],
+  },
+  {
+    group: 'Protocols',
+    items: ['UART', 'SPI', 'I2C', 'CAN', 'Ethernet'],
+  },
+];
+
+const CURRENT_COURSES = [
+  'Object Oriented Programming (Java)',
+  'Discrete Math',
+  'Digital Design',
+  'Circuit Analysis',
+];
+
+const COMPLETED_COURSES = [
+  'Linear Algebra',
+  'Multivariable Calculus',
+  'Differential/Integral Calculus',
+  'Differential Equations',
+  'Physics 1 — Mechanics',
+  'Physics 2 — Electricity & Magnetism',
+  'Intro to Computing (Python)',
+];
+
+function useFadeIn(ref) {
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { el.classList.add('visible'); obs.disconnect(); } },
+      { threshold: 0.1 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+}
+
+function FadeSection({ id, children, style }) {
+  const ref = useRef();
+  useFadeIn(ref);
+  return <section id={id} ref={ref} className="fade-in" style={style}>{children}</section>;
+}
+
+function ProjectCard({ project }) {
+  return (
+    <a className="project-card" href={project.href} style={{textDecoration:'none',display:'block'}}>
+      <div className="project-header">
+        <span className="project-title">{project.title}</span>
+        <span className="project-org">{project.org}</span>
+      </div>
+      <div className="project-date">{project.date}</div>
+      <p className="project-desc">{project.desc}</p>
+      <div className="project-tags">
+        {project.tags.map(t => <span key={t} className="tag">{t}</span>)}
+      </div>
+      <div className="expand-btn" style={{marginTop:10}}>View details →</div>
+    </a>
+  );
+}
 
 
 
-<div class="arrow"> 
-    <a href="#about">
-        More About Me
-    <i class="fa-solid fa-angles-down"></i>
-    </a> 
-</div>
-{% include about.html%}
-{% include projects.html%}
-{% include honors.html%}
-{% include skills.html%}
-{% include coursework.html%}
-{% include contact.html%}
+function App() {
+  const [activeSection, setActiveSection] = useState('');
+
+  const scrollLocked = useRef(false);
+  const lockTimer = useRef(null);
+
+  useEffect(() => {
+    const sectionIds = ['about', 'experience', 'skills', 'projects', 'achievements', 'coursework', 'contact'];
+    const onScroll = () => {
+      if (scrollLocked.current) return;
+      const scrollY = window.scrollY + window.innerHeight / 2;
+      let current = '';
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el && el.offsetTop <= scrollY) current = id;
+      }
+      if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight - 10) {
+        current = 'contact';
+      }
+      setActiveSection(current);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Fade hero on mount
+  const heroRef = useRef();
+  useEffect(() => {
+    setTimeout(() => heroRef.current?.classList.add('visible'), 80);
+  }, []);
+
+  return (
+    <>
+      <nav>
+        <div className="nav-inner">
+          <a href="#" className="nav-name">William Schotte</a>
+          <ul className="nav-links">
+            {NAV_ITEMS.map(item => (
+              <li key={item.href}>
+                <a
+                  href={item.href}
+                  className={activeSection === item.href.slice(1) ? 'active' : ''}
+                  onClick={() => {
+                    setActiveSection(item.href.slice(1));
+                    scrollLocked.current = true;
+                    if (lockTimer.current) clearTimeout(lockTimer.current);
+                    lockTimer.current = setTimeout(() => { scrollLocked.current = false; }, 800);
+                  }}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+            <li>
+              <a
+                href="https://drive.google.com/file/d/1Rc_Uu_Ed_9YKX92FWFVh-O782x5ISS_b/view"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  color: 'var(--text)',
+                  fontWeight: 600,
+                  background: 'var(--gold-light)',
+                  border: '1.5px solid var(--gold)',
+                  borderRadius: '10px',
+                  padding: '5px 13px',
+                  transition: 'background 0.15s, box-shadow 0.15s',
+                }}
+                onMouseEnter={e => { e.currentTarget.style.background='#ddd6a8'; e.currentTarget.style.boxShadow='0 2px 8px rgba(179,163,105,0.25)'; }}
+                onMouseLeave={e => { e.currentTarget.style.background='var(--gold-light)'; e.currentTarget.style.boxShadow='none'; }}
+              >
+                Resume ↗
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <main>
+        {/* HERO */}
+        <div id="hero" ref={heroRef} className="fade-in">
+          <div className="hero-text">
+            <div className="section-label" style={{marginBottom: 8, fontSize: 16, letterSpacing: '0.06em', borderTop: 'none', paddingTop: 0}}>Computer Engineering @ Georgia Tech</div>
+            <div style={{fontSize: 14, color: 'var(--text3)', marginBottom: 18, letterSpacing: '0.01em'}}>Computing Hardware &amp; Emerging Architectures &nbsp;|&nbsp; Systems &amp; Architecture</div>
+            <h1>William Schotte</h1>
+            <h2>Hardware · Embedded Systems · ASIC Verification</h2>
+            <p className="hero-bio">
+              Computer Engineering student with a passion for embedded systems, chip design, and anything bridging the gap between hardware and software. Currently, I work on firmware for electric collegiate formula racing (HyTech Racing) and ASIC verification for student-led tape-outs (SiliconJackets).<br/><br/>GPA: 4.0 / 4.0<br/>Expected graduation: Spring 2028.
+            </p>
+            <div className="hero-actions">
+              <a href="#projects" className="btn btn-primary">View Projects</a>
+              <a
+                href="https://drive.google.com/file/d/1Rc_Uu_Ed_9YKX92FWFVh-O782x5ISS_b/view"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-secondary"
+              >
+                Resume ↗
+              </a>
+            </div>
+            <div className="hero-contact">
+              <a href="mailto:wschotte@gatech.edu" className="hero-contact-link">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                wschotte@gatech.edu
+              </a>
+              <a href="https://www.linkedin.com/in/williamschotte/" target="_blank" rel="noopener noreferrer" className="hero-contact-link">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                LinkedIn
+              </a>
+              <a href="https://github.com/wschotte" target="_blank" rel="noopener noreferrer" className="hero-contact-link">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                GitHub
+              </a>
+            </div>
+          </div>
+          <img
+            src="uploads/profile_photo-1776734721993.jpeg"
+            alt="William Schotte"
+            className="hero-photo"
+          />
+        </div>
+
+        {/* ABOUT */}
+        <FadeSection id="about">
+          <div className="section-label">About</div>
+          <div className="about-grid">
+            <div className="about-card full">
+              <h3>Background</h3>
+              <p>
+                Growing up in Kennesaw, Georgia, I've always loved exploring new technologies of every kind. Combined with a passion for math and physics, these curiosities led me to pursue Computer Engineering here at Georgia Tech, where I'm focusing on learning how and why computers work from both a hardware and software perspective.
+              </p>
+            </div>
+            <div className="about-card">
+              <h3>At Georgia Tech</h3>
+              <p>
+                I love working on anything at the intersection of hardware and software. I'm a member of GT's HyTech Racing Electrical Team, where I write firmware in C++ for sensor integration, data transmission, and real-time controls running on an electric formula car. I'm also a part of GT's SiliconJackets Digital Verification Team, where I develop UVM testbenches in SystemVerilog to support our student-led tape-out process. Outside of these clubs, I also enjoy learning more about computer architecture and embedded systems, and applying these skills in multidisciplinary projects with my friends.
+              </p>
+            </div>
+            <div className="about-card">
+              <h3>Goals</h3>
+              <p>
+                I'm seeking internships in either embedded systems/firmware, or digital ASIC verification. I'd love to get real hands-on industry experience and apply the skills I've developed alongside a team of engineers. Long-term, I'm considering the BS/MS program to get my Master's in ECE after completing my undergraduate studies.
+              </p>
+            </div>
+            <div className="about-card full">
+              <h3>Outside of Engineering</h3>
+              <p>
+                I play piano and electric guitar, and my favorite band is The Strokes. I love playing board games, video games, and sports with friends, and I'm always open to new adventures and trying new things.
+              </p>
+            </div>
+          </div>
+        </FadeSection>
+
+        {/* EXPERIENCE */}
+        <FadeSection id="experience">
+          <div className="section-label">Experience</div>
+          <div className="timeline">
+            <div className="timeline-item">
+              <div className="timeline-left"><div className="timeline-date">May 2026 – Aug 2026</div></div>
+              <div className="timeline-right">
+                <div className="timeline-role">Avionics Systems Engineering Intern <span className="timeline-badge">Upcoming</span></div>
+                <div className="timeline-org">L3Harris Technologies</div>
+                <div className="timeline-desc">Incoming summer internship on the Avionics team.</div>
+              </div>
+            </div>
+            <div className="timeline-item">
+              <div className="timeline-left"><div className="timeline-date">Jan 2026 – Present</div></div>
+              <div className="timeline-right">
+                <div className="timeline-role">Digital Verification Engineer</div>
+                <div className="timeline-org">SiliconJackets @ Georgia Tech</div>
+                <div className="timeline-desc">Writing UVM testbenches in SystemVerilog to verify RTL designs for student-led ASIC tape-outs.</div>
+              </div>
+            </div>
+            <div className="timeline-item">
+              <div className="timeline-left"><div className="timeline-date">Aug 2025 – Present</div></div>
+              <div className="timeline-right">
+                <div className="timeline-role">Firmware Engineer</div>
+                <div className="timeline-org">HyTech Racing @ Georgia Tech</div>
+                <div className="timeline-desc">Writing C++ firmware for sensor integration, inter-board communication, and real-time operations for an electric formula car.</div>
+              </div>
+            </div>
+            <div className="timeline-item">
+              <div className="timeline-left"><div className="timeline-date">Jul 2025 – Present</div></div>
+              <div className="timeline-right">
+                <div className="timeline-role">Math Tutor</div>
+                <div className="timeline-org">Knack</div>
+                <div className="timeline-desc">Tutoring fellow Georgia Tech students in Calculus 1–3 and Linear Algebra.</div>
+              </div>
+            </div>
+            <div className="timeline-item">
+              <div className="timeline-left"><div className="timeline-date">Aug 2025 – Nov 2025</div></div>
+              <div className="timeline-right">
+                <div className="timeline-role">Team Member</div>
+                <div className="timeline-org">Chick-fil-A</div>
+                <div className="timeline-desc">Front-of-house and kitchen operations during freshman year.</div>
+              </div>
+            </div>
+          </div>
+        </FadeSection>
+
+        {/* SKILLS */}
+        <FadeSection id="skills">
+          <div className="section-label">Skills</div>
+          <div className="skills-grid">
+            {SKILLS.map(sg => (
+              <div key={sg.group} className="skill-group">
+                <div className="skill-group-title">{sg.group}</div>
+                <div className="skill-tags">
+                  {sg.items.map(s => <span key={s} className="skill-tag">{s}</span>)}
+                </div>
+              </div>
+            ))}
+          </div>
+        </FadeSection>
+
+        {/* PROJECTS */}
+        <FadeSection id="projects">
+          <div className="section-label">Projects</div>
+          <div className="projects-grid">
+            {PROJECTS.map(p => <ProjectCard key={p.title} project={p} />)}
+          </div>
+        </FadeSection>
+
+        {/* ACHIEVEMENTS */}
+        <FadeSection id="achievements">
+          <div className="section-label">Achievements</div>
+          <div className="achievements-list">
+            {ACHIEVEMENTS.map(a => (
+              <div key={a.title} className="achievement-item">
+<div>
+                  <div className="achievement-title">{a.title}</div>
+                  <div className="achievement-desc">{a.desc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </FadeSection>
+
+        {/* COURSEWORK */}
+        <FadeSection id="coursework">
+          <div className="section-label">Coursework</div>
+          <div className="coursework-grid">
+            <div className="course-card">
+              <div className="course-card-title">Current — Spring 2026</div>
+              <ul className="course-list">
+                {CURRENT_COURSES.map(c => <li key={c}>{c}</li>)}
+              </ul>
+            </div>
+            <div className="course-card">
+              <div className="course-card-title">Completed</div>
+              <ul className="course-list">
+                {COMPLETED_COURSES.map(c => <li key={c}>{c}</li>)}
+              </ul>
+            </div>
+          </div>
+        </FadeSection>
+
+        {/* CONTACT */}
+        <FadeSection id="contact">
+          <div className="section-label">Contact</div>
+          <p style={{fontSize: 15, color: 'var(--text2)', marginBottom: 24, maxWidth: 480}}>
+            Open to internship opportunities, research roles, and interesting projects. Best reached by email.
+          </p>
+          <div className="contact-row">
+            <a href="mailto:wschotte@gatech.edu" className="contact-link">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              wschotte@gatech.edu
+            </a>
+            <a href="https://www.linkedin.com/in/williamschotte/" target="_blank" rel="noopener noreferrer" className="contact-link">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              LinkedIn
+            </a>
+            <a href="https://github.com/wschotte" target="_blank" rel="noopener noreferrer" className="contact-link">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              GitHub
+            </a>
+            <a
+              href="https://drive.google.com/file/d/1Rc_Uu_Ed_9YKX92FWFVh-O782x5ISS_b/view"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="contact-link"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              Resume
+            </a>
+          </div>
+        </FadeSection>
+      </main>
+
+      <footer>
+        <p>William Schotte · Computer Engineering @ Georgia Tech</p>
+      </footer>
+
+      {/* TWEAKS PANEL */}
+      <TweaksPanel />
+
+      {/* STICKY FOOTER BAR */}
+      <div className="sticky-bar">
+        <a href="mailto:wschotte@gatech.edu">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          wschotte@gatech.edu
+        </a>
+        <div className="bar-divider" />
+        <a href="https://www.linkedin.com/in/williamschotte/" target="_blank" rel="noopener noreferrer">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <div className="bar-divider" />
+        <a href="https://github.com/wschotte" target="_blank" rel="noopener noreferrer">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          GitHub
+        </a>
+
+      </div>
+    </>
+  );
+}
+
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "accentColor": "#b3a369",
+  "bgColor": "#F8F6F2",
+  "darkMode": false
+}/*EDITMODE-END*/;
+
+function TweaksPanel() {
+  const [show, setShow] = useState(false);
+  const [tweaks, setTweaks] = useState(TWEAK_DEFAULTS);
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (e.data?.type === '__activate_edit_mode') setShow(true);
+      if (e.data?.type === '__deactivate_edit_mode') setShow(false);
+    };
+    window.addEventListener('message', handler);
+    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+    return () => window.removeEventListener('message', handler);
+  }, []);
+
+  const update = (key, val) => {
+    const next = { ...tweaks, [key]: val };
+    setTweaks(next);
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { [key]: val } }, '*');
+    applyTweaks(next);
+  };
+
+  const applyTweaks = (t) => {
+    document.documentElement.style.setProperty('--gold', t.accentColor);
+    document.documentElement.style.setProperty('--bg', t.darkMode ? '#141210' : t.bgColor);
+    document.documentElement.style.setProperty('--text', t.darkMode ? '#F0EDE7' : '#1C1A17');
+    document.documentElement.style.setProperty('--text2', t.darkMode ? '#9A9590' : '#6B6760');
+    document.documentElement.style.setProperty('--white', t.darkMode ? '#1E1C19' : '#FDFCFA');
+    document.documentElement.style.setProperty('--border', t.darkMode ? '#2E2B26' : '#E4E0D8');
+    document.documentElement.style.setProperty('--bg2', t.darkMode ? '#1C1A17' : '#F0EDE7');
+    document.documentElement.style.setProperty('--gold-light', t.darkMode ? '#2a2618' : '#E8E2CC');
+  };
+
+  if (!show) return null;
+
+  const panelStyle = {
+    position: 'fixed', bottom: 24, right: 24, zIndex: 9999,
+    background: '#FDFCFA', border: '1px solid #E4E0D8',
+    borderRadius: 12, padding: '20px 22px', width: 240,
+    boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
+    fontFamily: 'Inter, sans-serif',
+  };
+
+  return (
+    <div style={panelStyle}>
+      <div style={{fontSize: 12, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#9A9590', marginBottom: 16}}>Tweaks</div>
+
+      <label style={{display: 'block', marginBottom: 14}}>
+        <div style={{fontSize: 12, color: '#6B6760', marginBottom: 6}}>Accent color</div>
+        <div style={{display: 'flex', gap: 8, alignItems: 'center'}}>
+          <input type="color" value={tweaks.accentColor} onChange={e => update('accentColor', e.target.value)} style={{width: 36, height: 28, border: 'none', padding: 0, cursor: 'pointer', borderRadius: 4}} />
+          <span style={{fontSize: 12, color: '#9A9590'}}>{tweaks.accentColor}</span>
+        </div>
+      </label>
+
+      <label style={{display: 'block', marginBottom: 14}}>
+        <div style={{fontSize: 12, color: '#6B6760', marginBottom: 6}}>Background</div>
+        <div style={{display: 'flex', gap: 8, alignItems: 'center'}}>
+          <input type="color" value={tweaks.bgColor} onChange={e => update('bgColor', e.target.value)} style={{width: 36, height: 28, border: 'none', padding: 0, cursor: 'pointer', borderRadius: 4}} />
+          <span style={{fontSize: 12, color: '#9A9590'}}>{tweaks.bgColor}</span>
+        </div>
+      </label>
+
+      <label style={{display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer'}}>
+        <input type="checkbox" checked={tweaks.darkMode} onChange={e => update('darkMode', e.target.checked)} />
+        <span style={{fontSize: 13, color: '#6B6760'}}>Dark mode</span>
+      </label>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LED Keychain — William Schotte</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #F8F6F2; --bg2: #F0EDE7; --text: #1C1A17; --text2: #6B6760;
+      --text3: #9A9590; --gold: #b3a369; --gold-light: #E8E2CC;
+      --border: #E4E0D8; --white: #FDFCFA; --radius: 10px; --max: 1080px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    ::selection { background: var(--gold-light); }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(248,246,242,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+    .nav-inner { max-width: var(--max); margin: 0 auto; padding: 0 40px; height: 54px; display: flex; align-items: center; gap: 16px; }
+    .nav-back { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text2); text-decoration: none; font-weight: 500; padding: 5px 10px; border-radius: 6px; transition: all 0.15s; }
+    .nav-back:hover { color: var(--text); background: var(--bg2); }
+    .nav-name { font-weight: 600; font-size: 15px; letter-spacing: -0.02em; color: var(--text); text-decoration: none; }
+    .nav-divider { color: var(--text3); font-size: 14px; }
+    main { max-width: var(--max); margin: 0 auto; padding: 100px 40px 80px; }
+    .project-label { font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    h1 { font-size: clamp(32px, 4vw, 48px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 12px; }
+    .meta { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; flex-wrap: wrap; }
+    .meta-org { font-size: 13px; font-weight: 500; color: var(--gold); background: var(--gold-light); padding: 4px 12px; border-radius: 20px; }
+    .meta-date { font-size: 13px; color: var(--text3); }
+    .divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+    .section-title { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text3); margin-bottom: 14px; }
+    .desc { font-size: 16px; color: var(--text2); line-height: 1.75; margin-bottom: 28px; text-wrap: pretty; max-width: 720px; }
+    .bullets { list-style: none; display: flex; flex-direction: column; gap: 14px; max-width: 720px; }
+    .bullets li { font-size: 15px; color: var(--text2); line-height: 1.7; padding-left: 20px; position: relative; text-wrap: pretty; }
+    .bullets li::before { content: '—'; position: absolute; left: 0; color: var(--gold); font-size: 13px; top: 3px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
+    .tag { font-size: 13px; font-weight: 450; padding: 5px 12px; border-radius: 20px; background: var(--bg2); color: var(--text2); border: 1px solid var(--border); }
+    footer { max-width: var(--max); margin: 0 auto; padding: 32px 40px; border-top: 1px solid var(--border); }
+    footer p { font-size: 13px; color: var(--text3); }
+
+    @media (max-width: 640px) {
+      main { padding: 72px 18px 60px; }
+      .nav-inner { padding: 0 18px; }
+      h1 { font-size: 28px; }
+      .desc { font-size: 14px; }
+      .bullets li { font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-back">← Back</a>
+    <span class="nav-divider">/</span>
+    <a href="../index.html" class="nav-name">William Schotte</a>
+    <span class="nav-divider">/</span>
+    <span style="font-size:13px;color:var(--text2)">LED Keychain</span>
+  </div>
+</nav>
+<main>
+  <div class="project-label">PCB Design · Altium Designer · Soldering</div>
+  <h1>LED Keychain</h1>
+  <div class="meta">
+    <span class="meta-org">HyTech Racing</span>
+    <span class="meta-date">2024</span>
+  </div>
+  <p class="desc">Designed the PCB for a flashing LED keychain as part of HyTech Racing's new member onboarding project. The goal was to gain hands-on experience with the full PCB design-to-assembly pipeline: schematic capture, layout, manufacturing, and soldering.</p>
+  <hr class="divider" />
+  <div class="section-title">Details</div>
+  <ul class="bullets">
+    <li>Designed the complete PCB schematic and layout in Altium Designer, including component placement, trace routing, and design rule checks (DRC).</li>
+    <li>Submitted the finished design files for PCB manufacturing, then soldered all components onto the physical board, completing the full hardware development cycle from design to assembled product.</li>
+  </ul>
+  <div class="tags">
+    <span class="tag">PCB Design</span>
+    <span class="tag">Altium Designer</span>
+    <span class="tag">Soldering</span>
+    <span class="tag">Schematic Capture</span>
+    <span class="tag">DRC</span>
+  </div>
+</main>
+<footer><p>William Schotte · Computer Engineering @ Georgia Tech</p></footer></body></html>
