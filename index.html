@@ -830,7 +830,24 @@ function App() {
                     setActiveSection(item.href.slice(1));
                     scrollLocked.current = true;
                     if (lockTimer.current) clearTimeout(lockTimer.current);
-                    lockTimer.current = setTimeout(() => { scrollLocked.current = false; }, 800);
+
+                    let lastY = window.scrollY;
+                    let stableTicks = 0;
+                    const startedAt = Date.now();
+                    const checkSettled = () => {
+                      if (window.scrollY === lastY) {
+                        stableTicks++;
+                        if (stableTicks >= 3 || Date.now() - startedAt > 3000) {
+                          scrollLocked.current = false;
+                          return;
+                        }
+                      } else {
+                        stableTicks = 0;
+                        lastY = window.scrollY;
+                      }
+                      lockTimer.current = setTimeout(checkSettled, 60);
+                    };
+                    lockTimer.current = setTimeout(checkSettled, 60);
                   }}
                 >
                   {item.label}
